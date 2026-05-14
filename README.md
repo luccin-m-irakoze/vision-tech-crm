@@ -148,10 +148,3 @@ See [`docs/FOLDER_TREE.md`](docs/FOLDER_TREE.md) for the full tree.
 | [`docs/presentations/PRESENTATION_DECK.md`](docs/presentations/PRESENTATION_DECK.md) | 1+4 | Live-presentation deck (≤14 slides). |
 
 ---
-
-## 8. Author
-
-**Course:** SENG 8240 — Best Programming Practices and Design Patterns
-**Instructor:** Rutarindwa Jean Pierre
-**Faculty:** Faculty of IT — Department of Software Engineering, AUCA
-**Academic year:** 2025 / 2026, Semester II
