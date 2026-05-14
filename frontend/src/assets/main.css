@@ -1,0 +1,151 @@
+/* ============================================================================
+ * Vision Technologies CRM - global styles
+ *   * Self-hosted variable fonts (Inter for body, Plus Jakarta Sans for display)
+ *   * Tailwind layers
+ *   * Reusable component classes
+ * ============================================================================ */
+
+@import '@fontsource-variable/inter/index.css';
+@import '@fontsource-variable/plus-jakarta-sans/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------- Base ---------------------------------------------------------- */
+html, body, #app {
+  height: 100%;
+}
+
+body {
+  font-family: 'Inter Variable', Inter, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-feature-settings: 'cv11', 'ss01', 'ss03';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: theme('colors.vtc.ink');
+  background: theme('backgroundImage.gradient-surface');
+  background-attachment: fixed;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Plus Jakarta Sans Variable', 'Plus Jakarta Sans', Inter, system-ui, sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* Smooth scrollbars on Webkit/Chromium */
+::-webkit-scrollbar       { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 8px; border: 2px solid transparent; background-clip: padding-box; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; background-clip: padding-box; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ---------- Reusable components ------------------------------------------ */
+@layer components {
+  /* --- Buttons --- */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold
+           transition-all duration-200 focus:outline-none focus-visible:ring-2
+           focus-visible:ring-offset-2 focus-visible:ring-offset-white
+           disabled:opacity-60 disabled:cursor-not-allowed select-none;
+  }
+  .btn-primary {
+    @apply btn text-white bg-gradient-to-r from-vtc-accent to-vtc-accent2
+           shadow-soft hover:shadow-glow hover:brightness-105
+           focus-visible:ring-vtc-accent active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply btn bg-white text-vtc-ink border border-slate-200
+           hover:bg-slate-50 hover:border-slate-300
+           focus-visible:ring-slate-400 active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply btn bg-transparent text-slate-600 hover:bg-slate-100 hover:text-vtc-ink
+           focus-visible:ring-slate-300;
+  }
+  .btn-danger {
+    @apply btn text-white bg-gradient-to-r from-red-500 to-vtc-danger
+           shadow-soft hover:brightness-105
+           focus-visible:ring-vtc-danger active:scale-[0.98];
+  }
+  .btn-success {
+    @apply btn text-white bg-gradient-to-r from-emerald-500 to-vtc-success
+           shadow-soft hover:brightness-105
+           focus-visible:ring-vtc-success active:scale-[0.98];
+  }
+  .btn-sm { @apply px-3 py-1.5 text-xs; }
+  .btn-icon {
+    @apply inline-flex items-center justify-center h-9 w-9 rounded-lg
+           text-slate-500 hover:text-vtc-ink hover:bg-slate-100
+           transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-vtc-accent;
+  }
+
+  /* --- Form controls --- */
+  .input {
+    @apply block w-full rounded-lg border border-slate-200 bg-white px-3.5 py-2.5 text-sm
+           placeholder:text-slate-400 shadow-soft
+           transition-all duration-150
+           focus:border-vtc-accent focus:outline-none focus:ring-4 focus:ring-vtc-accent/15;
+  }
+  .input-error {
+    @apply border-red-400 focus:border-red-500 focus:ring-red-500/15;
+  }
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-wide text-slate-600 mb-1.5;
+  }
+
+  /* --- Surfaces --- */
+  .card {
+    @apply bg-white rounded-xl2 shadow-card border border-slate-100/80 p-5
+           transition-shadow duration-200;
+  }
+  .card-hover { @apply hover:shadow-lift hover:border-slate-200; }
+  .surface {
+    @apply bg-white/70 backdrop-blur-sm rounded-xl2 border border-white/60 shadow-soft;
+  }
+
+  /* --- Badges --- */
+  .badge {
+    @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold
+           ring-1 ring-inset;
+  }
+  .badge-blue    { @apply badge bg-blue-50 text-blue-700 ring-blue-200; }
+  .badge-purple  { @apply badge bg-purple-50 text-purple-700 ring-purple-200; }
+  .badge-green   { @apply badge bg-emerald-50 text-emerald-700 ring-emerald-200; }
+  .badge-amber   { @apply badge bg-amber-50 text-amber-700 ring-amber-200; }
+  .badge-red     { @apply badge bg-red-50 text-red-700 ring-red-200; }
+  .badge-slate   { @apply badge bg-slate-100 text-slate-700 ring-slate-200; }
+  .badge-teal    { @apply badge bg-teal-50 text-teal-700 ring-teal-200; }
+
+  /* --- Tables --- */
+  .table-modern {
+    @apply min-w-full text-sm;
+  }
+  .table-modern thead th {
+    @apply sticky top-0 bg-slate-50/80 backdrop-blur text-left text-[11px] font-semibold
+           uppercase tracking-wider text-slate-500 px-4 py-3 border-b border-slate-200 z-10;
+  }
+  .table-modern tbody td {
+    @apply px-4 py-3 border-b border-slate-100 align-middle;
+  }
+  .table-modern tbody tr {
+    @apply transition-colors hover:bg-slate-50/70;
+  }
+  .table-modern tbody tr:nth-child(even) {
+    @apply bg-slate-50/30;
+  }
+
+  /* --- Page header / section header --- */
+  .page-title { @apply text-2xl font-bold text-vtc-ink; }
+  .page-subtitle { @apply text-sm text-slate-500 mt-0.5; }
+  .section-title { @apply text-base font-semibold text-vtc-ink; }
+
+  /* --- Skeleton loader --- */
+  .skeleton {
+    @apply rounded-md bg-gradient-to-r from-slate-100 via-slate-200 to-slate-100
+           bg-[length:200%_100%] animate-shimmer;
+  }
+
+  /* --- Link --- */
+  .link {
+    @apply text-vtc-accent2 font-medium hover:underline underline-offset-2;
+  }
+}

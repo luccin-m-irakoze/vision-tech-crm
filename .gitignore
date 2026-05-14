@@ -1,0 +1,48 @@
+# --------- Java / Maven ---------
+target/
+*.class
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+hs_err_pid*
+.mvn/
+mvnw
+mvnw.cmd
+.factorypath
+.classpath
+.project
+.settings/
+
+# --------- IntelliJ / Eclipse / VS Code ---------
+.idea/
+*.iml
+*.iws
+.vscode/
+.recommenders/
+
+# --------- Node / Vue / Vite ---------
+node_modules/
+dist/
+.vite/
+.npm/
+.pnpm-debug.log
+yarn-error.log
+*.log
+
+# --------- Env / Secrets ---------
+.env
+.env.local
+.env.*.local
+backend/.env
+frontend/.env
+
+# --------- Docker ---------
+docker-volumes/
+
+# --------- OS ---------
+.DS_Store
+Thumbs.db

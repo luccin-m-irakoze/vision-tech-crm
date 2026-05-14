@@ -1,0 +1,80 @@
+version: "3.9"
+
+# ============================================================================
+# Vision Technologies CRM - full stack composition
+#   * mysql      -> MySQL 8 database (named volume for persistence)
+#   * backend    -> Spring Boot 3 REST API
+#   * frontend   -> Vue.js 3 SPA built with Vite, served by NGINX
+# Run:  docker compose up --build
+# ============================================================================
+
+services:
+
+  mysql:
+    image: mysql:8.0
+    container_name: vtc-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: vision_crm
+      MYSQL_USER: crm_user
+      MYSQL_PASSWORD: crm_pass
+      MYSQL_ROOT_PASSWORD: root_pass
+    ports:
+      # Host 3307 -> container 3306 (host 3306 is already in use locally)
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend/src/main/resources/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+      - ./backend/src/main/resources/data.sql:/docker-entrypoint-initdb.d/02-data.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-ucrm_user", "-pcrm_pass"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [vtc-net]
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: vtc-backend
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/vision_crm?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: crm_user
+      SPRING_DATASOURCE_PASSWORD: crm_pass
+      JWT_SECRET: ChangeMeToAVeryLongRandomBase64SecretAtLeast64Chars0123456789ABCDEF
+      JWT_EXPIRATION_MS: "86400000"
+      CORS_ALLOWED_ORIGINS: http://localhost:5173,http://localhost
+      SERVER_PORT: "8080"
+    ports:
+      # Host 8081 -> container 8080 (host 8080 is already in use locally)
+      - "8081:8080"
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/actuator/health || exit 0"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+    networks: [vtc-net]
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: vtc-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "5173:80"
+    networks: [vtc-net]
+
+volumes:
+  mysql_data:
+
+networks:
+  vtc-net:
+    driver: bridge

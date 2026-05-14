@@ -1,0 +1,3 @@
+-- Seed users (passwords are BCrypt hashes; see DataLoader for plain values).
+-- This file is provided for reference / standalone DB bootstrapping.
+-- The runtime app uses DataLoader.java to seed sample data idempotently.
