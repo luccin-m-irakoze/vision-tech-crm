@@ -1,8 +1,5 @@
 # Vision Technologies Company Ltd — CRM System
 
-Customer Relationship Management system built for **Vision Technologies
-Company Ltd (VTC)** as the final exam project for **SENG 8240 — Best
-Programming Practices and Design Patterns** at AUCA, semester II 2025/2026.
 
 | Layer    | Stack                                          |
 |----------|------------------------------------------------|
