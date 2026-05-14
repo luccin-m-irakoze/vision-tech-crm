@@ -139,9 +139,6 @@ See [`docs/FOLDER_TREE.md`](docs/FOLDER_TREE.md) for the full tree.
 | [`docs/PHASE1.md`](docs/PHASE1.md)               | 1 | Case study, problem statement, 5 UML diagrams. |
 | [`docs/DESIGN_PATTERN.md`](docs/DESIGN_PATTERN.md) | 2 | How MVC is applied. |
 | [`docs/CODING_STANDARDS.md`](docs/CODING_STANDARDS.md) | 2 | Google Java Style + Vue.js Style Guide. |
-| [`docs/GIT_GUIDE.md`](docs/GIT_GUIDE.md)         | 3 | VCS setup, branching, conventional commits. |
 | [`docs/TEST_PLAN.md`](docs/TEST_PLAN.md)         | 4 | Test plan + 20 test cases. |
-| [`docs/presentations/FULL_DOC_DECK.md`](docs/presentations/FULL_DOC_DECK.md) | All | Full documentation deck outline. |
-| [`docs/presentations/PRESENTATION_DECK.md`](docs/presentations/PRESENTATION_DECK.md) | 1+4 | Live-presentation deck (≤14 slides). |
 
 ---
